@@ -5,17 +5,23 @@ header('Content-Type: application/json; charset=utf-8');
 require_once "config.php";
 require_once "helpers.php";
 
-// Ambil data webhook Fonnte
 $raw = file_get_contents('php://input');
 $data = json_decode($raw, true);
 
-// Simpan ke log
+// Jika tidak ada data dari Fonnte → hentikan script (mencegah error)
+if (!$data) {
+    http_response_code(200);
+    exit("OK");
+}
+
+// Log
 file_put_contents("logs/webhook.log", date("Y-m-d H:i:s") . " | " . $raw . "\n", FILE_APPEND);
 
 // Ambil variabel penting
-$sender = $data['sender'];
-$name = $data['name'];
-$message = strtolower(trim($data['message']));
+$sender = $data['sender'] ?? null;
+$name = $data['name'] ?? "Customer";
+$message = strtolower(trim($data['message'] ?? ""));
+
 
 // ==========================
 //   MENU BOT RELAYLAB
