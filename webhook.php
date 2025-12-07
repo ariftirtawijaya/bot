@@ -31,7 +31,10 @@ $message = strtolower(trim($data['message'] ?? ""));
 if (in_array($message, ["menu", "start", "halo", "hi", "hai"])) {
     sendMessage(
         $sender,
-        "Halo *$name*! 👋\nSelamat datang di *RelayLab Autolight*.\n\nSilakan pilih menu:\n/button=Menu|Cek Harga Relay|Cek Stok|Hubungi Admin"
+        "Halo $name 👋\nSelamat datang di RelayLab Autolight.\n\nSilakan pilih menu:",
+        [
+            "buttons" => "Menu|Cek Harga Relay|Cek Stok|Hubungi Admin"
+        ]
     );
 
     exit;

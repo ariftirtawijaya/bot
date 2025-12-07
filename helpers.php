@@ -21,3 +21,4 @@ function sendMessage($target, $message, $extra = [])
 
     return $response;
 }
+
